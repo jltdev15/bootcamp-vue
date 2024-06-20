@@ -4,16 +4,17 @@ import { ref, watch, watchEffect } from "vue"
 const todoId = ref(1)
 const data = ref(null)
 
-// watch(
-//   todoId,
-//   async () => {
-//     const response = await fetch(
-//       `https://jsonplaceholder.typicode.com/posts/${todoId.value}`
-//     )
-//     data.value = await response.json()
-//   },
-//   { immediate: true }
-// )
+watch(
+  todoId,
+  async () => {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${todoId.value}`
+    )
+    // Side Effect
+    data.value = await response.json()
+  },
+  { immediate: true }
+)
 
 watchEffect(async () => {
   const response = await fetch(
